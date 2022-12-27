@@ -6,6 +6,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+import java.util.concurrent.ConcurrentHashMap;
+
 @RestController
 @SpringBootApplication
 public class TestGitActionApplication {
@@ -13,17 +18,19 @@ public class TestGitActionApplication {
     public static void main(String[] args) {
         SpringApplication.run(TestGitActionApplication.class, args);
     }
+
+    private final ConcurrentHashMap<Long, User> data = new ConcurrentHashMap<>();
 @GetMapping("/hello")
     public String welcome(){
         return "Welcome";
 }
     @GetMapping("/user")
-    public String user(){
-        return "new User";
+    public Collection<User> user(){
+         return new ArrayList<>(data.values());
     }
     @PostMapping("/")
-    public ResponseEntity<String> test() {
-        // if (string.equals("test")) {
+    public ResponseEntity<String> test(@RequestBody User user) {
+       data.put(1234234L,user);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 }
