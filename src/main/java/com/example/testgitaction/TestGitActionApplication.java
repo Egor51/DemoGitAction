@@ -15,4 +15,8 @@ public class TestGitActionApplication {
     public String welcome(){
         return "Welcome";
 }
+    @GetMapping("/user")
+    public String user(){
+        return "new User";
+    }
 }
