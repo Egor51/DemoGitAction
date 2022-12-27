@@ -3,6 +3,7 @@ package com.example.testgitaction;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -28,9 +29,18 @@ public class TestGitActionApplication {
     public Collection<User> user(){
          return new ArrayList<>(data.values());
     }
-    @PostMapping("/")
-    public ResponseEntity<String> test(@RequestBody User user) {
-       data.put(1234234L,user);
+    @PostMapping(
+            path = "/",
+            consumes = {MediaType.APPLICATION_FORM_URLENCODED_VALUE},
+            produces = {
+            MediaType.APPLICATION_ATOM_XML_VALUE,
+            MediaType.APPLICATION_JSON_VALUE
+    })
+    public ResponseEntity<String> test(@RequestParam("name") String name,@RequestParam("phone") String phone) {
+    User user = new User();
+    user.setName(name);
+    user.setPhone(phone);
+      data.put(1234234L,user);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 }
