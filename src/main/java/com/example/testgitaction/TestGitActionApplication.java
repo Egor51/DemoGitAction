@@ -3,10 +3,9 @@ package com.example.testgitaction;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
 @RestController
 @SpringBootApplication
 public class TestGitActionApplication {
@@ -22,11 +21,9 @@ public class TestGitActionApplication {
     public String user(){
         return "new User";
     }
-    @PostMapping()
-    public HttpStatus test(@RequestBody String string){
-        if (string.equals("test")) {
-            return HttpStatus.OK;
-        }
-        return HttpStatus.I_AM_A_TEAPOT;
+    @PostMapping("/")
+    public ResponseEntity<String> test() {
+        // if (string.equals("test")) {
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 }
