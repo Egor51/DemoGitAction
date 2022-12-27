@@ -23,7 +23,7 @@ jobs:
       run: mvn clean install
 
     - name: Build & push Docker
-      user: mr-smithers-excellent/docker-build-push@v5
+      uses: mr-smithers-excellent/docker-build-push@v5
       with:
         image: egor051/demo-action
         tags: latest
