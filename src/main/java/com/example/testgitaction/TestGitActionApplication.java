@@ -30,17 +30,12 @@ public class TestGitActionApplication {
          return new ArrayList<>(data.values());
     }
     @PostMapping(
-            path = "/",
-            consumes = {MediaType.APPLICATION_FORM_URLENCODED_VALUE},
-            produces = {
-            MediaType.APPLICATION_ATOM_XML_VALUE,
-            MediaType.APPLICATION_JSON_VALUE
-    })
-    public ResponseEntity<String> test(@RequestParam("name") String name,@RequestParam("phone") String phone) {
-    User user = new User();
-    user.setName(name);
-    user.setPhone(phone);
-      data.put(1234234L,user);
-        return new ResponseEntity<>(HttpStatus.OK);
+        path = "/",
+        consumes = {MediaType.APPLICATION_FORM_URLENCODED_VALUE})
+
+        public ResponseEntity<String> test(User user) {
+        data.put(1234234L,user);
+
+    return new ResponseEntity<>(HttpStatus.OK);
     }
 }
