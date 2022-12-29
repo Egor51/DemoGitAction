@@ -1,4 +1,4 @@
-package com.example.testgitaction;
+package com.example.testgitaction.model;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
