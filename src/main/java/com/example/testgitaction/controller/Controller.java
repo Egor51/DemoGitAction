@@ -15,6 +15,9 @@ import java.util.Collection;
 import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
 
+
+
+
 @RestController
 public class Controller {
     public Controller(FlatRepository flatRepository, FlatService flatService) {
@@ -55,7 +58,8 @@ public class Controller {
         return flatRepository.getALlFlat();
     }
     @GetMapping("/check-flat/")
-    public List<FlatAnalitics> checkFlat(@RequestBody Flat flat){
+    public List<FlatAnalitics> checkFlat(@RequestParam String city,@RequestParam String street, @RequestParam int houseNumber,@RequestParam String corpNumber){
+        Flat flat = new Flat (0,city,street,houseNumber,corpNumber,0,0,0,0);
         return  flatService.findFlat(flat);
     }
 }
