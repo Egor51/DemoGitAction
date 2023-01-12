@@ -8,7 +8,9 @@ import lombok.Data;
 public class Flat {
     long id;
     String city;
+    String dateFirstPublish;
     String street;
+
     int houseNumber;
     String corpNumber;
     int flatNumber;
@@ -16,9 +18,14 @@ public class Flat {
 
     int meter;
     long price;
+    @JsonCreator
+    public Flat(){
+
+    }
 
     @JsonCreator
     public Flat(@JsonProperty("id") long id,
+                @JsonProperty("dateFirstPublish") String dateFirstPublish,
                 @JsonProperty("city") String city,
                 @JsonProperty("street") String street,
                 @JsonProperty("houseNumber") int houseNumber,
@@ -38,4 +45,5 @@ public class Flat {
         this.meter = meter;
         this.price = price;
     }
+
 }

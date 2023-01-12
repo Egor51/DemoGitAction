@@ -1,5 +1,6 @@
 package com.example.testgitaction.model;
 
+import ch.qos.logback.core.model.Model;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
@@ -10,6 +11,9 @@ public class FlatAnalitics {
     int countRoom;
     long price;
     long priceFoMeter;
+    @JsonCreator
+    public FlatAnalitics(){
+    }
 @JsonCreator
     public FlatAnalitics(@JsonProperty("sours")String sours,@JsonProperty("countRoom")int countRoom,@JsonProperty("price") long price,@JsonProperty("priceFoMetr") long priceFoMeter) {
         this.sours = sours;
