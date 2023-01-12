@@ -1,10 +1,12 @@
 package com.example.testgitaction.controller;
 
+
 import com.example.testgitaction.model.Flat;
 import com.example.testgitaction.model.FlatAnalitics;
 import com.example.testgitaction.model.User;
 import com.example.testgitaction.repository.FlatRepository;
 import com.example.testgitaction.service.FlatService;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -15,9 +17,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
 
-
-
-
+@Log4j2
 @RestController
 public class Controller {
     public Controller(FlatRepository flatRepository, FlatService flatService) {
@@ -49,17 +49,21 @@ public class Controller {
     }
 
     @PostMapping("/add-flat")
-    public ResponseEntity<String> saveFlat(@RequestBody Flat flat){
+    public ResponseEntity<String> saveFlat(@RequestBody Flat flat) {
         flatRepository.saveFlat(flat);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
+
     @GetMapping("/allFlat")
-    public List<Flat> getAllFlat(){
+    public List<Flat> getAllFlat() {
         return flatRepository.getALlFlat();
     }
-    @GetMapping("/check-flat/")
-    public List<FlatAnalitics> checkFlat(@RequestParam String city,@RequestParam String street, @RequestParam int houseNumber,@RequestParam String corpNumber){
-        Flat flat = new Flat (0,city,street,houseNumber,corpNumber,0,0,0,0);
-        return  flatService.findFlat(flat);
+
+    @CrossOrigin("/")
+    @GetMapping(value = "/check-flat/",produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<FlatAnalitics>> checkFlat(@ModelAttribute("flat") Flat flat) {
+        log.info("Get /check-flat " + flat );
+        return new ResponseEntity<>(flatService.findFlat(flat),HttpStatus.OK);
+
     }
 }
