@@ -1,7 +1,7 @@
 package com.example.testgitaction.repository;
 
 import com.example.testgitaction.model.Flat;
-import com.example.testgitaction.model.User;
+import com.example.testgitaction.model.FlatAnalitics;
 import org.springframework.stereotype.Repository;
 
 import java.util.*;
@@ -31,6 +31,17 @@ public class FlatRepository {
             new Flat(134, "20-01-2022", "Moscow", "Lenina", 29, "corp 2", 2, 3, 30, 1000000),
             new Flat(134, "20-01-2022", "Moscow", "Lenina", 29, "corp 2", 2, 1, 30, 1000000)
     );
+
+    List<FlatAnalitics> analytics = Arrays.asList(
+            new FlatAnalitics("Москва ул.Ленина д.32 корп.2",1,100000,100000),
+            new FlatAnalitics("Москва ул.Ленина д.32 корп.2",2,100000,100000),
+            new FlatAnalitics("Москва ул.Ленина д.32 корп.2",3,100000,100000)
+
+    );
+
+    public List<FlatAnalitics> getAnalytics(){
+        return analytics;
+    }
 
 
     public List<Flat> getALlFlat() {

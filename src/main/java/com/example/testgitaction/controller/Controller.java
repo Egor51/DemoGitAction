@@ -59,11 +59,14 @@ public class Controller {
         return flatRepository.getALlFlat();
     }
 
-    @CrossOrigin("/")
+    @CrossOrigin("*")
     @GetMapping(value = "/check-flat/",produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<FlatAnalitics>> checkFlat(@ModelAttribute("flat") Flat flat) {
         log.info("Get /check-flat " + flat );
         return new ResponseEntity<>(flatService.findFlat(flat),HttpStatus.OK);
-
+    }
+    @GetMapping("/analytics")
+    public ResponseEntity<List<FlatAnalitics>>getAnalitycs(){
+        return new ResponseEntity<>(flatRepository.getAnalytics(),HttpStatus.OK);
     }
 }
