@@ -19,6 +19,7 @@ import java.util.concurrent.ConcurrentHashMap;
 
 @Log4j2
 @RestController
+@CrossOrigin(origins = "*")
 public class Controller {
     public Controller(FlatRepository flatRepository, FlatService flatService) {
         this.flatRepository = flatRepository;
@@ -59,12 +60,12 @@ public class Controller {
         return flatRepository.getALlFlat();
     }
 
-    @CrossOrigin("*")
     @GetMapping(value = "/check-flat/",produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<FlatAnalitics>> checkFlat(@ModelAttribute("flat") Flat flat) {
         log.info("Get /check-flat " + flat );
         return new ResponseEntity<>(flatService.findFlat(flat),HttpStatus.OK);
     }
+
     @GetMapping("/analytics")
     public ResponseEntity<List<FlatAnalitics>>getAnalitycs(){
         return new ResponseEntity<>(flatRepository.getAnalytics(),HttpStatus.OK);
